@@ -1,4 +1,5 @@
 ﻿alabaster==0.7.12
+scikit_learn==0.24.1
 argh==0.26.2
 pandas == 1.2.4
 gunicorn==20.1.0
