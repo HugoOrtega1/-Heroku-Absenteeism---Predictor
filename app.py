@@ -20,27 +20,24 @@ model = pickle.load(open('model', 'rb'))
 def home():
     
     return render_template('Home.html')
-   
-@app.route('/predict', methods=['POST'])
+ 
+@app.route('/predictor', methods=['POST','GET'])
 def predict():
-        rea = request.form['ReasonCategory']
-        tran = request.form['Transport Expense']
-        age = request.form['Age']
-        edu = request.form['Education']
-        chi = request.form['Children']
-        
-        
-        
-        
-        
-        inp = np.array([[rea, tran, age, edu, chi]])
-        prediction = model.predict(inp)
-        
-        if prediction == 1:
-            return render_template('afterno.html')
-        
+    
+        if request.method == 'POST':
+            rea = request.form['ReasonCategory']
+            tran = request.form['Transport Expense']
+            age = request.form['Age']
+            edu = request.form['Education']
+            chi = request.form['Children']
+            inp = np.array([[rea, tran, age, edu, chi]])
+            prediction = model.predict(inp)
+            if prediction == 1:
+                return render_template('afteryes.html')
+            else:
+                return render_template('afterno.html')
         else:
-           return render_template('afteryes.html')
+           return render_template('predictor.html')
        
            
 if __name__ == "__main__":
